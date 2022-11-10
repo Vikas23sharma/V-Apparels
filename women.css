@@ -73,3 +73,47 @@ img{
     text-decoration: solid;
     color: black;
 }
+
+
+#womencontainer{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* gap: 1px; */
+    margin-top: 10%;
+    padding: 1%;
+}
+
+#womencontainer>div>img{
+   height: 300px;
+   width: 200px;
+   background-color: white;
+   display: block;
+   margin: auto;
+}
+
+#womencontainer>div>button{
+    display: block;
+    margin: auto;
+    background-color: black;
+    color: whitesmoke;
+    padding: 1%;
+}
+
+#womencontainer>div{
+    border: 1px solid gray;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+#womencontainer>div:hover{
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+#womencontainer>div>h3{
+    margin-top: 1%;
+}
+
+#womencontainer>div>h2{
+    margin-top: 1%;
+}
