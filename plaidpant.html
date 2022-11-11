@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-sweatpants</title>
+    <style>
+        #navbar{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    /* padding: 1%; */
+}
+
+#u-nav{
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+    /* border: 1px solid blue; */
+    padding: 0% 1%;
+}
+
+#u-nav>div{
+    display: flex;
+    justify-content: space-evenly;
+    /* border: 1px solid green; */
+    width: 20%;
+    align-items: center;
+}
+
+#u-nav button{
+    background-color: black;
+    color: white;
+    height: 50%;
+}
+
+#b-nav{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    padding: 1%;
+    align-items: center;
+}
+
+#searchbar{
+    width: 50%;
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 0.75%;
+}
+
+#carticon{
+    height: 50px;
+}
+
+#carticon:hover{
+    height: 55px;
+   
+
+}
+
+img{
+    width: 100%;
+   
+}
+
+#imgbox{
+   
+    width: 10%;
+}
+
+#b-nav a{
+    text-decoration: none;
+    color: gray;
+}
+
+#b-nav a:hover{
+    text-decoration: solid;
+    color: black;
+}
+
+#spcontainer{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* gap: 1px; */
+    margin-top: 10%;
+    padding: 1%;
+}
+
+#spcontainer>div>img{
+   height: 300px;
+   width: 200px;
+   background-color: white;
+   display: block;
+   margin: auto;
+}
+
+#spcontainer>div>button{
+    display: block;
+    margin: auto;
+    background-color: black;
+    color: whitesmoke;
+    padding: 1%;
+}
+
+#spcontainer>div{
+    border: 1px solid gray;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+#spcontainer>div:hover{
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+#spcontainer>div>h3{
+    margin-top: 1%;
+}
+
+#spcontainer>div>h2{
+    margin-top: 1%;
+}
+
+#search{
+    background-color: black;
+    padding: 1%;
+    color: whitesmoke;
+}
+
+@media all and (min-width:600px) and (max-width:900px) {
+    #spcontainer{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media all and (min-width:100px) and (max-width:599px) {
+    #spcontainer{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div id="u-nav">
+            <div>
+                <div>
+                    <p>CN-US$</p>
+                </div>
+                <div>
+                    <p>Help</p>
+                </div>
+
+                <a href="signup.html"><button>Sign Up Or Log In</button></a> 
+            </div>
+
+        </div>
+        <div id="b-nav">
+            <div id="imgbox">
+            <a href="index.html" class="logo"><img id="img" src="V app.jpg" alt=""></a>
+            </div>
+            <div><a href="women.html">WOMEN</a></div>
+            <div><a href="men.html"> MEN</a></div>
+            <input id="searchbar" type="text" placeholder="SEARCH">
+            <button id="search">SEARCH</button>
+
+            <div><a href="cart.html"><img id="carticon" src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" alt="cart"></a></div>
+            
+            
+        </div>
+    </div>
+
+    <div id="spcontainer"></div>
+</body>
+</html>
+<script>
+let url="https://636ca63291576e19e310f37b.mockapi.io//vwomen"
+let bag=[];
+let cart=JSON.parse(localStorage.getItem("cart")) ||[]
+fetch(url)
+.then((res)=>res.json())
+.then((data)=>{bag=data
+    // displaycard(data)
+    // console.log(data)
+    let newdata=data.filter(function(element){
+    return element.category.toLowerCase()=="skirts";
+   })
+   displaycard(newdata)
+})
+
+function displaycard(data){
+
+    document.querySelector("#spcontainer").innerHTML=""
+    data.forEach(element => {
+        let div=document.createElement("div")
+        
+        let image=document.createElement("img")
+        image.setAttribute("src",element.avatar)
+
+        let name=document.createElement("h1")
+        name.innerText=element.name
+
+        let category=document.createElement("h3")
+        category.innerText="Category:"+element.category
+
+        let color=document.createElement("h4")
+        color.innerText="Color:"+element.color
+
+        let material=document.createElement("h4")
+        material.innerText="Material:"+element.material
+
+        let des=document.createElement("h4")
+        des.innerText=element.description
+
+        let price=document.createElement("h2")
+        price.innerText="Price:"+`$${element.price}`
+
+        let button=document.createElement("button")
+        button.innerText="ADD TO CART"
+        button.addEventListener("click", function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || []
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id == element.id) {
+                    alert("Product Already In Cart!!")
+                    return
+                }
+            }
+            cart.push({ ...element,quantity: 1 })
+            localStorage.setItem("cart", JSON.stringify(cart))
+            alert("Product Added To Cart ")
+        })
+
+        div.append(image,name,category,price,button)
+        document.querySelector("#spcontainer").append(div)
+    });
+    
+}
+
+
+
+</script>

@@ -1,42 +1,71 @@
-let url="https://636ca63291576e19e310f37b.mockapi.io//vwomen"
-let bag=[];
-fetch(url)
-.then((res)=>res.json())
-.then((data)=>{bag=data
-    displaycard(data)
-console.log(data)})
+let bag = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+let url = "https://636ca63291576e19e310f37b.mockapi.io//vwomen"
 
-function displaycard(data){
+fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+        bag = data
+        displaycard(data)
+        
+    })
+
+function displaycard(data) {
+    document.querySelector("#womencontainer").innerHTML=""
 
     data.forEach(element => {
-        let div=document.createElement("div")
-        
-        let image=document.createElement("img")
-        image.setAttribute("src",element.avatar)
+        let div = document.createElement("div")
 
-        let name=document.createElement("h1")
-        name.innerText=element.name
+        let image = document.createElement("img")
+        image.setAttribute("src", element.avatar)
 
-        let category=document.createElement("h3")
-        category.innerText="Category:"+element.category
+        let name = document.createElement("h1")
+        name.innerText = element.name
 
-        let color=document.createElement("h4")
-        color.innerText="Color:"+element.color
+        let category = document.createElement("h3")
+        category.innerText = "Category:" + element.category
 
-        let material=document.createElement("h4")
-        material.innerText="Material:"+element.material
+        let color = document.createElement("h4")
+        color.innerText = "Color:" + element.color
 
-        let des=document.createElement("h4")
-        des.innerText=element.description
+        let material = document.createElement("h4")
+        material.innerText = "Material:" + element.material
 
-        let price=document.createElement("h2")
-        price.innerText="Price:"+element.price
+        let des = document.createElement("h4")
+        des.innerText = element.description
 
-        let button=document.createElement("button")
-        button.innerText="ADD TO CART"
+        let price = document.createElement("h2")
+        price.innerText = "Price:" + `$${element.price}`
 
-        div.append(image,name,category,price,button)
+        let button = document.createElement("button")
+        button.innerText = "ADD TO CART"
+        button.addEventListener("click", function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || []
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id == element.id) {
+                    alert("Product Already In Cart!!")
+                    return
+                }
+            }
+            cart.push({ ...element, quantity: 1 })
+            localStorage.setItem("cart", JSON.stringify(cart))
+            alert("Product Added To Cart ")
+        })
+
+        div.append(image, name, category, price, button)
         document.querySelector("#womencontainer").append(div)
     });
-    
+
+}
+
+
+document.querySelector("#search").addEventListener("click",search)
+function search(){
+   let searcheditem=document.querySelector("#searchbar").value
+   console.log(bag)
+   let newdata=bag.filter(function(element){
+    return element.category.toLowerCase().includes(searcheditem)
+   })
+   if(newdata.length==0){newdata=bag}
+   displaycard(newdata)
 }

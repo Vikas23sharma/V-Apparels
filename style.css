@@ -36,10 +36,20 @@
 }
 
 #searchbar{
-    width: 70%;
+    width: 50%;
     font-size: 20px;
     border: 1px solid black;
     padding: 0.75%;
+}
+
+#carticon{
+    height: 50px;
+}
+
+#carticon:hover{
+    height: 55px;
+   
+
 }
 
 img{
@@ -218,12 +228,23 @@ img{
     background-color: rgb(156, 250, 15);
 }
 
-#second>button{
+#second>a>button{
+    width: 120%;
     display: block;
     background-color: black;
     color: white;
     padding: 1%;
     font-size: 20px;
+    /* text-decoration: none; */
+}
+
+#second>a{
+    text-decoration: none;
+}
+
+#second>a>button:hover{
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #second:hover{
@@ -376,6 +397,51 @@ padding-top: 5%;
 border: 1px solid blue;
 width: 40%;
 }
+
+
+@media all and (min-width:600px) and (max-width:900px) {
+    #mid-container{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media all and (min-width:100px) and (max-width:599px) {
+    #mid-container{
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    #mid-cont-2{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+#sweatpant{
+    text-decoration: none;
+    color: black;
+}
+
+#sweatpant:hover{
+    color: purple;
+}
+
+#jeans{
+    text-decoration: none;
+    color: black;
+}
+
+#jeans:hover{
+    color: purple;
+}
+
+#pp{
+    text-decoration: none;
+    color: black;
+}
+
+#pp:hover{
+    color: purple;
+}
+
 
 
 
