@@ -126,5 +126,18 @@ justify-content: space-evenly;
     text-align: center;
 }
 
+#pay{
+    background-color: black;
+    color: whitesmoke;
+    padding: 1%;
+    width: 120%;
+    font-size: 20px;
+}
+
+#pay:hover{
+    background-color: rgb(20, 245, 8);
+    color: black;
+}
+
 
 

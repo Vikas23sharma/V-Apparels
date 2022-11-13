@@ -367,7 +367,7 @@ font-weight: 800;
     justify-content: space-around;
     height: 500px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: rgb(240, 220, 245);
+    background-color: rgb(238, 237, 248);
 }
 
 #footer>div:nth-child(2){
@@ -394,8 +394,14 @@ padding-top: 5%;
 }
 
 #footer>div:nth-child(1){
-border: 1px solid blue;
+/* border: 1px solid blue; */
 width: 40%;
+padding-left: 8%;
+padding-top: 3%;
+}
+
+#footer>div:nth-child(1)>img{
+    width: 60%;
 }
 
 
