@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>V-signin</title>
     <style>
         #navbar {
     display: flex;
@@ -177,26 +177,32 @@ hr{
         <input id="e" type="Email" placeholder="Enter Email">
         <p>Password</p>
         <input id="p" type="password" placeholder="Enter Password">
-        <button>SIGN UP</button>
-        <a href="signin.html">ALREADY HAVE AN ACCOUNT <br> SIGNIN</a>
+        <button>LOG IN</button>
+        <a href="signup.html">NEW TO V-APPARELS SIGNUP</a>
     </div>
 </body>
 </html>
 <script>
-    document.querySelector("#signupcont>button").addEventListener("click",signup)
-   
+    document.querySelector("#signupcont>button").addEventListener("click",signin)
     let dataarr=JSON.parse(localStorage.getItem("data")) ||[]
-    function signup(){
-    
+    function signin(){
     let email=document.querySelector("#e").value
     let password=document.querySelector("#p").value
-    if(email==""){alert("ENTER CORRECT EMAIL")}
-    if(password==""){alert("PASSWORD FIELD EMPTY")}
-    else if(email!="" && password!=""){alert("SIGNUP SUCESSFUL")}
-    let dataobj={email,password}
-    dataarr.push(dataobj)
-    localStorage.setItem("data",JSON.stringify(dataarr))
-
-
-    }
+    let info={email,password}
+    if(info.Email==""||info.pass==""){alert("INCORRECT DETAILS!")}
+        else{
+            for(let i=0;i<dataarr.length;i++)
+            {
+                if( dataarr[i].email==info.email && dataarr[i].password==info.password )
+                {alert("LOG IN SUCCESSFUL")
+                  break;}
+                else if(dataarr[i].password!=info.password && dataarr[i].email==info.email)
+                {alert("INCORRECT PASSWORD")
+                 break;}
+                else if(dataarr[i].email!=info.email && dataarr[i].password==info.password)
+                {alert("INCORRECT EMAIL");break;}
+                // else{alert("INCORRECT EMAIL");break;}
+            }
+        }
+}
 </script>
